@@ -11,7 +11,7 @@ function JobForm({ onJobAdded }) {
 
     const newJob = { companyName, position, status };
 
-    axios.post('http://localhost:8080/api/jobs', newJob)
+    axios.post(`${process.env.REACT_APP_API_URL}/api/jobs`, newJob)
       .then(response => {
         onJobAdded(response.data); // notify parent component
         setCompanyName('');
