@@ -10,46 +10,73 @@ const JobList = ({ jobs, onDelete, onUpdate }) => {
     return 'badge applied';
   };
 
+  if (!jobs || jobs.length === 0) {
+    return (
+      <p className="empty">
+        No job applications yet. Click the + button in the corner to add your first one.
+      </p>
+    );
+  }
+
   return (
-    <div>
-      <h2>Job Applications</h2>
+    <div className="job-list">
+      {jobs.map((job) => {
+        const company = job.companyName || job.company || 'Unknown company';
+        const position = job.position || 'Unknown position';
 
-      {jobs.length === 0 ? (
-        <p>No job applications yet.</p>
-      ) : (
-        <div>
-          {jobs.map((job) => (
-            // 🔹 Here’s where you use the card class
-            <div key={job.id} className="card">
-              <h3>{job.companyName} — {job.position}</h3>
+        return (
+          <div key={job.id} className="job-card">
+            <div className="job-title">{position}</div>
+            <div className="job-company">{company}</div>
 
-              {/* 🔹 Status badge */}
+            <div className="job-meta">
+              {/* Status badge */}
               <span className={badgeClass(job.status)}>
                 {job.status || 'Applied'}
               </span>
 
-              {/* 🔹 Action buttons */}
-              <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
-                <button className="button" onClick={() => onUpdate(job.id, 'Applied')}>
-                  Set Applied
-                </button>
-                <button className="button" onClick={() => onUpdate(job.id, 'Interview')}>
-                  Set Interview
-                </button>
-                <button className="button" onClick={() => onUpdate(job.id, 'Offer')}>
-                  Set Offer
-                </button>
-                <button className="button" onClick={() => onUpdate(job.id, 'Rejected')}>
-                  Set Rejected
-                </button>
-                <button className="button" onClick={() => onDelete(job.id)}>
-                  Delete
-                </button>
-              </div>
+              {job.location && <span>{job.location}</span>}
+              {job.created_at && (
+                <span>
+                  Created:{' '}
+                  {new Date(job.created_at).toLocaleDateString(undefined, {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </span>
+              )}
             </div>
-          ))}
-        </div>
-      )}
+
+            {job.notes && (
+              <p className="job-notes">
+                <strong>Notes:</strong> {job.notes}
+              </p>
+            )}
+
+            <div
+              className="job-actions"
+              style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: 8 }}
+            >
+              <button className="btn" onClick={() => onUpdate(job.id, 'Applied')}>
+                Set Applied
+              </button>
+              <button className="btn" onClick={() => onUpdate(job.id, 'Interview')}>
+                Set Interview
+              </button>
+              <button className="btn" onClick={() => onUpdate(job.id, 'Offer')}>
+                Set Offer
+              </button>
+              <button className="btn" onClick={() => onUpdate(job.id, 'Rejected')}>
+                Set Rejected
+              </button>
+              <button className="btn btn-danger" onClick={() => onDelete(job.id)}>
+                Delete
+              </button>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

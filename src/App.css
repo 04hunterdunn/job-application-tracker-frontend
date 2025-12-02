@@ -1,34 +1,364 @@
-/* App.css */
-:root { --card:#f7f7f8; --muted:#6b7280; --border:#e5e7eb; --ok:#16a34a; --warn:#f59e0b; --bad:#ef4444; }
-
-* { box-sizing: border-box; }
-body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; background:#fff; color:#111; }
-
-.container { width:min(900px, 92%); margin:32px auto; }
-
-.muted { color: var(--muted); }
-
-.card {
-  background: var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:16px 18px;
-  margin:12px 0;
-  box-shadow: 0 1px 2px rgba(0,0,0,.04);
-  transition: transform .12s ease;
+/* Color tokens (you can still use these anywhere) */
+:root {
+  --card: #f7f7f8;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --ok: #16a34a;
+  --warn: #f59e0b;
+  --bad: #ef4444;
 }
-.card:hover { transform: translateY(-1px); }
 
-.badge { display:inline-block; font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--border); background:#fff; }
-.badge.applied { border-color:#60a5fa; color:#1d4ed8; }
-.badge.interview { border-color:var(--warn); color:#a16207; }
-.badge.offer { border-color:var(--ok); color:#166534; }
-.badge.rejected { border-color:var(--bad); color:#991b1b; }
+* {
+  box-sizing: border-box;
+}
 
+/* We'll mostly use .app-root for background instead of body, but this is fine */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  background: #020617;
+  color: #e5e7eb;
+}
+
+/* ====== APP SHELL / LAYOUT ====== */
+
+.app-root {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #0f172a, #020617);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+
+.app-shell {
+  width: 100%;
+  max-width: 1100px;
+  background: #020617;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.75);
+  padding: 1.5rem;
+}
+
+/* Optional legacy container if you still use it anywhere */
+.container {
+  width: min(900px, 92%);
+  margin: 32px auto;
+}
+
+/* ====== HEADER / NAVBAR ====== */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-title-pill {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 197, 94, 0.7);
+  color: rgb(34, 197, 94);
+}
+
+.app-main {
+  margin-top: 0.5rem;
+}
+
+/* Simple user avatar area */
+.app-user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.app-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #22c55e, #0f172a);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+/* ====== JOB LIST / CARDS ====== */
+
+.job-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+/* New dashboard-style job card */
+.job-card {
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(51, 65, 85, 0.9);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
+  border-color: rgba(56, 189, 248, 0.6);
+  background: radial-gradient(circle at top left, #0f172a, #020617);
+}
+
+.job-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.job-company {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* Extra info row (status, dates, location) */
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* Notes under a job (keeping your original style) */
+.job-notes {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #cbd5f5;
+}
+.job-notes strong {
+  font-weight: 600;
+}
+
+/* ====== STATUS BADGES ====== */
+
+.job-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* default style; you can add more variants */
+.job-status-default {
+  background: rgba(15, 118, 110, 0.25);
+  color: #5eead4;
+}
+
+/* legacy badge classes you already had, still usable if you reference them */
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #111;
+}
+.badge.applied {
+  border-color: #60a5fa;
+  color: #1d4ed8;
+}
+.badge.interview {
+  border-color: var(--warn);
+  color: #a16207;
+}
+.badge.offer {
+  border-color: var(--ok);
+  color: #166534;
+}
+.badge.rejected {
+  border-color: var(--bad);
+  color: #991b1b;
+}
+
+/* ====== BUTTONS ====== */
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.btn:hover {
+  background: rgba(30, 64, 175, 0.8);
+  border-color: rgba(59, 130, 246, 0.9);
+  transform: translateY(-1px);
+}
+
+.btn-danger:hover {
+  background: rgba(185, 28, 28, 0.85);
+  border-color: rgba(248, 113, 113, 0.9);
+}
+
+/* Back button for the NewJob page */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-bottom: 0.9rem;
+  transition:
+    background 0.15s ease,
+    transform 0.12s ease,
+    border-color 0.15s ease;
+}
+
+.btn-back:hover {
+  background: rgba(30, 64, 175, 0.9);
+  border-color: rgba(96, 165, 250, 0.9);
+  transform: translateX(-2px);
+}
+
+/* Legacy generic .button style (kept in case you still use it) */
 .button {
-  appearance:none; border:1px solid var(--border); background:#fff; padding:8px 12px; border-radius:10px; cursor:pointer;
+  appearance: none;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
 }
-.button:hover { background:#fafafa; }
+.button:hover {
+  background: #fafafa;
+}
 
-.error { color:#b91c1c; background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:12px 14px; }
-.empty { text-align:center; padding:24px; border:1px dashed var(--border); border-radius:12px; background:#fafafa; }
+/* ====== FLOATING ADD BUTTON ====== */
+
+.floating-add-btn {
+  position: fixed;
+  right: 1.75rem;
+  bottom: 1.75rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: none;
+  background: radial-gradient(circle at 30% 20%, #22c55e, #16a34a, #14532d);
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 18px 45px rgba(22, 163, 74, 0.8);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.floating-add-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 26px 70px rgba(34, 197, 94, 0.9);
+  filter: brightness(1.05);
+}
+
+/* ====== ERROR / EMPTY STATES ====== */
+
+.error {
+  color: #fecaca;
+  background: #450a0a;
+  border: 1px solid #b91c1c;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.empty {
+  text-align: center;
+  padding: 24px;
+  border: 1px dashed rgba(148, 163, 184, 0.6);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.9);
+  color: #9ca3af;
+}
+
+/* ====== LOADING SPINNER ====== */
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 3px solid rgba(148, 163, 184, 0.35);
+  border-top-color: #22c55e;
+  animation: spin 0.7s linear infinite;
+  margin: 2rem auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* ====== RESPONSIVE ====== */
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 1rem;
+    border-radius: 1.1rem;
+  }
+
+  .floating-add-btn {
+    right: 1.1rem;
+    bottom: 1.1rem;
+  }
+
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+}

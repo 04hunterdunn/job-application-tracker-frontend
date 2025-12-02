@@ -1,61 +1,112 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { supabase } from '../supabaseClient';
 
 function JobForm({ onJobAdded }) {
-  const [companyName, setCompanyName] = useState('');
+  const [company, setCompany] = useState('');
   const [position, setPosition] = useState('');
-  const [status, setStatus] = useState('Applied'); // default value
+  const [status, setStatus] = useState('Applied');
+  const [notes, setNotes] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
 
-    const newJob = { companyName, position, status };
+    // Get the current logged-in user
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
 
-    axios.post(`${process.env.REACT_APP_API_URL}/api/jobs`, newJob)
-      .then(response => {
-        onJobAdded(response.data); // notify parent component
-        setCompanyName('');
-        setPosition('');
-        setStatus('Applied'); // reset to default
-      })
-      .catch(error => console.error('Error adding job:', error));
-  };
+    if (userError || !user) {
+      setLoading(false);
+      alert('You must be logged in to add a job.');
+      return;
+    }
+
+    // Insert the job into Supabase
+    const { data, error } = await supabase
+      .from('jobs')
+      .insert([
+        {
+          user_id: user.id,
+          company,
+          position,
+          status,
+          notes,
+        },
+      ])
+      .select()
+      .single(); // return the one inserted row
+
+    setLoading(false);
+
+    if (error) {
+      console.error('Error inserting job:', error);
+      alert('Error saving job. Please try again.');
+      return;
+    }
+
+    // Clear the form
+    setCompany('');
+    setPosition('');
+    setStatus('Applied');
+    setNotes('');
+
+    // Tell parent (JobsPage) about the new job so it appears immediately
+    if (onJobAdded) {
+      onJobAdded(data);
+    }
+  }
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
-      <h2>Add Job Application</h2>
-      <div style={{ marginBottom: '10px' }}>
-        <label>Company Name: </label>
+    <form onSubmit={handleSubmit} className="job-form">
+      <h2>Add a new application</h2>
+
+      <div className="form-row">
+        <label>Company</label>
         <input
           type="text"
-          value={companyName}
-          onChange={(e) => setCompanyName(e.target.value)}
+          value={company}
+          onChange={e => setCompany(e.target.value)}
           required
         />
       </div>
-      <div style={{ marginBottom: '10px' }}>
-        <label>Position: </label>
+
+      <div className="form-row">
+        <label>Position</label>
         <input
           type="text"
           value={position}
-          onChange={(e) => setPosition(e.target.value)}
+          onChange={e => setPosition(e.target.value)}
           required
         />
       </div>
-      <div style={{ marginBottom: '10px' }}>
-        <label>Status: </label>
+
+      <div className="form-row">
+        <label>Status</label>
         <select
           value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          required
+          onChange={e => setStatus(e.target.value)}
         >
-          <option value="Applied">Applied</option>
-          <option value="Interview">Interview</option>
-          <option value="Offered">Offered</option>
-          <option value="Rejected">Rejected</option>
+          <option>Applied</option>
+          <option>Interviewing</option>
+          <option>Offer</option>
+          <option>Rejected</option>
         </select>
       </div>
-      <button type="submit">Add Job</button>
+
+      <div className="form-row">
+        <label>Notes</label>
+        <textarea
+          value={notes}
+          onChange={e => setNotes(e.target.value)}
+        />
+      </div>
+
+      <button type="submit" disabled={loading}>
+        {loading ? 'Saving…' : 'Add application'}
+      </button>
     </form>
   );
 }
