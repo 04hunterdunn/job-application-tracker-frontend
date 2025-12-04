@@ -15,12 +15,13 @@ function NewJobPage({ onBack }) {
       <button
         type="button"
         onClick={onBack}
-        style={{ marginBottom: '1rem' }}
-      >
+        className="btn-back"
+        >
         ← Back to jobs
-      </button>
-
-      <Greeting name="Hunter" />
+    </button>
+      <h1 className="page-title">Add a New Job</h1>
+      <p className="page-subtitle">Track details about a job you’re applying for.</p>
+      
       <JobForm onJobAdded={handleJobAdded} />
     </div>
   );

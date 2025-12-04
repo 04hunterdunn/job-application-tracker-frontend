@@ -4,7 +4,7 @@ import JobList from '../Components/JobList.js';
 import FloatingAddButton from '../Components/FloatingAddButton';
 import { supabase } from '../supabaseClient';
 
-function JobsPage({ onAddJobClick }) {
+function JobsPage({ onAddJobClick, displayName }) {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
@@ -126,7 +126,7 @@ function JobsPage({ onAddJobClick }) {
     <div className="app-main" style={{ position: 'relative' }}>
       {/* Friendly greeting under the main header */}
       <div style={{ marginBottom: '0.75rem' }}>
-        <Greeting name="Hunter" />
+        <Greeting name={displayName} />
       </div>
 
       {/* Search + sort controls */}

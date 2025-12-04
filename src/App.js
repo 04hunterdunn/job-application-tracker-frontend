@@ -9,6 +9,9 @@ import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-
 function App() {
   const [mode, setMode] = useState('login'); // 'login' or 'signup'
   const [user, setUser] = useState(null);
+  const displayName =
+    user?.user_metadata?.full_name ||
+    (user?.email ? user.email.split('@')[0] : 'there');
   const [loadingUser, setLoadingUser] = useState(true);
 
   const navigate = useNavigate();
@@ -176,6 +179,7 @@ function App() {
               element={
                 <JobsPage
                   onAddJobClick={() => navigate('/jobs/new')}
+                  displayName={displayName}
                 />
               }
             />
@@ -184,10 +188,10 @@ function App() {
               element={
                 <NewJobPage
                   onBack={() => navigate('/jobs')}
+                  displayName={displayName}
                 />
               }
             />
-            {/* Any other path while logged in → send to /jobs */}
             <Route path="*" element={<Navigate to="/jobs" replace />} />
           </Routes>
         </main>
