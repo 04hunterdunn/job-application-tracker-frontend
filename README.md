@@ -18,71 +18,58 @@ https://job-application-tracker-frontend-pi.vercel.app/login
 ---
 
 ## ⭐ Why I Built This  
-I originally used Google Sheets to track my job applications, but it never felt personalized or structured enough.  
-I wanted something cleaner—something built around the way *I* search for jobs.
+I used to track all my applications in Google Sheets, but it quickly got messy and didn’t feel personal. I wanted something cleaner—something built around the way *I* search for jobs.
 
-At the same time, I wanted hands-on experience building and deploying a full-stack application.  
-This project gave me both:
+This project let me create a tool I actually enjoy using while also gaining real experience with:
 
-- A job tracker that I actually enjoy using  
-- Real experience with frontend, backend, authentication, databases, and cloud deployment  
-
----
-
-## 🕘 Project Evolution
-
-### **🔵 Version 1 (Archived: Java Spring Boot + MySQL)**  
-The first full version of this app was built using a traditional backend stack:
-
-- **Backend:** Java Spring Boot (deployed on Render)  
-- **Database:** MySQL on Railway  
-- **Frontend:** React on Vercel  
-- Full REST API (CRUD, status updates, authentication)  
-
-That version is fully preserved here (archived for reference):  
-📦 **Original Backend Repo:** https://github.com/04hunterdunn/job-application-tracker-backend
-
-It was an important learning experience in API design, SQL schema structure, and multi-service cloud deployment.
+- Authentication  
+- Cloud-hosted databases  
+- Frontend architecture  
+- Deployment workflows  
 
 ---
 
-### **🟢 Current Version (Supabase + React)**  
-After learning from the original version, I rebuilt the app using a simpler, faster, serverless architecture:
+## 🕘 From Version 1 → Version 2  
+This project originally started as a full Java Spring Boot + MySQL application. It worked, but required maintaining multiple services (API server, DB host, deployment platform, etc.).
 
-- **Supabase Auth** for Sign Up / Login / Logout  
-- **Supabase Postgres** for cloud-hosted data  
-- **Row Level Security (RLS)** so every user only sees their own jobs  
-- **React frontend** deployed on Vercel  
-- No backend server to maintain  
+After learning from that build, I rebuilt the app using **Supabase**, which lets me handle:
 
-This version is cleaner, more maintainable, and matches what I originally wanted:  
-a personalized job tracker with a modern UI and secure, cloud-based storage.
+- Auth  
+- Database  
+- RLS policies  
+
+…all in one place, without maintaining a backend server.
+
+If you're curious, the archived Java version is still available:
+
+📦 **Original Spring Boot Repo:**  
+https://github.com/04hunterdunn/job-application-tracker-backend
 
 ---
 
 ## ✨ Features  
-- Create an account and log in  
-- Add job applications with company, role, notes, and status  
-- Update job status (Applied → Interviewing → Offer → Rejected)  
+- Account creation and login  
+- Add and track applications (company, role, notes, status)  
+- Update job progress (Applied → Interviewing → Offer → Rejected)  
 - Delete entries  
-- Dashboard automatically sorted by newest → oldest  
-- Full per-user data isolation via Supabase RLS  
+- Dashboard sorted from newest to oldest  
+- Full per-user data isolation using RLS  
 
 ---
 
-## 🛠️ Tech Stack (Current Version)
+## 🛠️ Tech Stack
 
 ### **Frontend**
 - React  
-- Supabase JavaScript Client  
+- Supabase JS client  
 - Deployed on Vercel  
-- Pure CSS for styling  
+- Custom CSS for styling  
 
 ### **Backend**
 - Supabase Postgres  
 - Supabase Auth  
-- Supabase Row Level Security  
-- Auto-generated REST/RPC APIs (no custom server needed)  
+- Row Level Security policies  
+- Auto-generated REST API  
 
 ---
 
@@ -119,34 +106,36 @@ http://localhost:3000
 ---
 
 ## 🔒 Security  
-This project uses Supabase **Row Level Security** to ensure:
+Supabase **Row Level Security** ensures:
 
-- Users only access their own jobs  
+- Each user only sees their own applications  
 - No cross-user data leaks  
 - Policies enforce user_id = auth.uid()
 
 ---
 
-## 📸 Screenshots
--Login/SignUp: <img width="1911" height="903" alt="Screenshot 2025-12-04 144320" src="https://github.com/user-attachments/assets/ba0ef3c1-eed6-4e80-8144-4e5eec785ced" />
+## 📸 Screenshots  
+**Login / Sign Up**  
+<img width="1911" height="903" alt="Screenshot 2025-12-04 144320" src="https://github.com/user-attachments/assets/ba0ef3c1-eed6-4e80-8144-4e5eec785ced" />
 
--Job Dashboard: <img width="1900" height="892" alt="Screenshot 2025-12-04 144552" src="https://github.com/user-attachments/assets/407d133d-be61-4761-a3f0-6f285762898c" />
+**Dashboard**  
+<img width="1900" height="892" alt="Screenshot 2025-12-04 144552" src="https://github.com/user-attachments/assets/407d133d-be61-4761-a3f0-6f285762898c" />
 
--Add Job Page: <img width="1885" height="891" alt="Screenshot 2025-12-04 144648" src="https://github.com/user-attachments/assets/bdfb25d4-ae71-4fa4-92b7-638d1d905dbf" />
+**Add Job Page**  
+<img width="1885" height="891" alt="Screenshot 2025-12-04 144648" src="https://github.com/user-attachments/assets/bdfb25d4-ae71-4fa4-92b7-638d1d905dbf" />
 
 ---
 
 ## 🧭 Future Improvements  
-- Sorting & filtering options  
-- Analytics/visual stats for job search progress  
+- Sorting & filtering  
+- Visualization/analytics  
 - Job detail pages  
 - Framer Motion animations  
-- Notes history or timeline view
+- Notes history  
 
 ---
 
 ## 🧑‍💻 Author  
 **Hunter Dunn**  
-Computer Science & Data Science  
-University of St. Thomas  
+Computer Science & Data Science — University of St. Thomas  
 GitHub: https://github.com/04hunterdunn
