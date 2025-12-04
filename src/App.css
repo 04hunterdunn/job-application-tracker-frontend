@@ -414,7 +414,7 @@ body {
   resize: vertical;
 }
 
-/* Submit button on the form */
+/* Submit button */
 .job-form button[type="submit"] {
   margin-top: 0.3rem;
   border-radius: 999px;
@@ -444,6 +444,17 @@ body {
   box-shadow: none;
 }
 
+/* Success toast */
+.toast-success {
+  margin-bottom: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(22, 163, 74, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.7);
+  color: #bbf7d0;
+  font-size: 0.85rem;
+}
+
 .page-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -455,4 +466,53 @@ body {
   font-size: 0.95rem;
   color: #9ca3af;
   margin-bottom: 1rem;
+}
+
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: radial-gradient(circle at top, #1d2540 0, #020617 55%);
+}
+
+.auth-header {
+  text-align: center;
+}
+
+.auth-subtitle {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  margin-top: 0.25rem;
+}
+
+.auth-toggle {
+  display: inline-flex;
+  background: rgba(15, 23, 42, 0.96);
+  border-radius: 999px;
+  border: 1px solid rgba(51, 65, 85, 0.9);
+  padding: 0.2rem;
+}
+
+.auth-tab {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.auth-tab.active {
+  background: rgba(37, 99, 235, 0.95);
+  color: #f9fafb;
+}
+
+.auth-card {
+  margin-top: 0.4rem;
 }

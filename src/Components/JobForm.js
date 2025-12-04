@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function JobForm({ onJobAdded }) {
   const [company, setCompany] = useState('');
@@ -8,8 +9,25 @@ function JobForm({ onJobAdded }) {
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState('');
+
+  // Clear success message after a few seconds
+  useEffect(() => {
+    if (!success) return;
+    const id = setTimeout(() => setSuccess(''), 2500);
+    return () => clearTimeout(id);
+  }, [success]);
+
   async function handleSubmit(e) {
     e.preventDefault();
+    setError(null);
+
+    if (!company.trim() || !position.trim()) {
+      setError('Please enter both a company and a position.');
+      return;
+    }
+
     setLoading(true);
 
     // Get the current logged-in user
@@ -20,30 +38,30 @@ function JobForm({ onJobAdded }) {
 
     if (userError || !user) {
       setLoading(false);
-      alert('You must be logged in to add a job.');
+      setError('You must be logged in to add a job.');
       return;
     }
 
     // Insert the job into Supabase
-    const { data, error } = await supabase
+    const { data, error: insertError } = await supabase
       .from('jobs')
       .insert([
         {
           user_id: user.id,
-          company,
-          position,
-          status,
-          notes,
+          company: company.trim(),
+          position: position.trim(),
+          status: status.trim(),
+          notes: notes.trim(),
         },
       ])
       .select()
-      .single(); // return the one inserted row
+      .single();
 
     setLoading(false);
 
-    if (error) {
-      console.error('Error inserting job:', error);
-      alert('Error saving job. Please try again.');
+    if (insertError) {
+      console.error('Error inserting job:', insertError);
+      setError('Error saving job. Please try again.');
       return;
     }
 
@@ -52,15 +70,22 @@ function JobForm({ onJobAdded }) {
     setPosition('');
     setStatus('Applied');
     setNotes('');
+    setSuccess('Job added!');
 
-    // Tell parent (JobsPage) about the new job so it appears immediately
+    // Notify parent if needed
     if (onJobAdded) {
       onJobAdded(data);
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="job-form">
+    <motion.form
+      onSubmit={handleSubmit}
+      className="job-form"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.22, ease: 'easeOut' }}
+    >
       <h2>Add a new application</h2>
 
       <div className="form-row">
@@ -69,7 +94,9 @@ function JobForm({ onJobAdded }) {
           type="text"
           value={company}
           onChange={e => setCompany(e.target.value)}
+          placeholder="Acme Corp"
           required
+          autoFocus
         />
       </div>
 
@@ -79,6 +106,7 @@ function JobForm({ onJobAdded }) {
           type="text"
           value={position}
           onChange={e => setPosition(e.target.value)}
+          placeholder="Software Engineer"
           required
         />
       </div>
@@ -101,13 +129,41 @@ function JobForm({ onJobAdded }) {
         <textarea
           value={notes}
           onChange={e => setNotes(e.target.value)}
+          placeholder="Recruiter, salary range, referral, etc."
         />
       </div>
+
+      <AnimatePresence>
+        {error && (
+          <motion.div
+            className="error"
+            style={{ marginBottom: '0.75rem', fontSize: '0.85rem' }}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+          >
+            {error}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {success && (
+          <motion.div
+            className="toast-success"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+          >
+            {success}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <button type="submit" disabled={loading}>
         {loading ? 'Saving…' : 'Add application'}
       </button>
-    </form>
+    </motion.form>
   );
 }
 

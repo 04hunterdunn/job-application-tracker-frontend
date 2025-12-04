@@ -67,70 +67,37 @@ function App() {
   // If no user: show login/signup UI (at /login)
   if (!user) {
     return (
-      <div className="app-root">
-        <div className="app-shell">
-          <header className="app-header">
-            <div>
-              <h1 className="app-title">Job Tracker</h1>
-              <div
-                style={{
-                  fontSize: '0.9rem',
-                  color: '#9ca3af',
-                  marginTop: '0.15rem',
-                }}
-              >
-                Sign in or create an account to manage your job applications.
-              </div>
-            </div>
-          </header>
+      <div className="auth-layout">
+        <div className="auth-header">
+          <h1 className="app-title">Job Tracker</h1>
+          <p className="auth-subtitle">
+            Keep your job search organized in one place.
+          </p>
+        </div>
 
-          <main className="app-main">
-            <div style={{ marginBottom: '0.75rem' }}>
-              {mode === 'login' ? (
-                <>
-                  <span>Don&apos;t have an account? </span>
-                  <button
-                    onClick={() => setMode('signup')}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      padding: 0,
-                      cursor: 'pointer',
-                      color: '#60a5fa',
-                      textDecoration: 'underline',
-                      fontSize: '0.9rem',
-                    }}
-                  >
-                    Sign up
-                  </button>
-                </>
-              ) : (
-                <>
-                  <span>Already have an account? </span>
-                  <button
-                    onClick={() => setMode('login')}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      padding: 0,
-                      cursor: 'pointer',
-                      color: '#60a5fa',
-                      textDecoration: 'underline',
-                      fontSize: '0.9rem',
-                    }}
-                  >
-                    Log in
-                  </button>
-                </>
-              )}
-            </div>
+        <div className="auth-toggle">
+          <button
+            type="button"
+            className={mode === 'login' ? 'auth-tab active' : 'auth-tab'}
+            onClick={() => setMode('login')}
+          >
+            Log in
+          </button>
+          <button
+            type="button"
+            className={mode === 'signup' ? 'auth-tab active' : 'auth-tab'}
+            onClick={() => setMode('signup')}
+          >
+            Sign up
+          </button>
+        </div>
 
-            {mode === 'login' ? (
-              <SignIn onLogin={setUser} />
-            ) : (
-              <SignUp />
-            )}
-          </main>
+        <div className="auth-card">
+          {mode === 'login' ? (
+            <SignIn onLogin={setUser} />
+          ) : (
+            <SignUp />
+          )}
         </div>
       </div>
     );
