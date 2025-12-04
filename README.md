@@ -1,5 +1,5 @@
 # 📌 Job Application Tracker  
-A full-stack, SaaS-style job tracking app built with **React**, **Supabase Auth**, **Supabase Postgres**, and deployed on **Vercel**.
+A modern, serverless job-tracking application built with **React**, **Supabase Auth**, and **Supabase Postgres**, fully deployed on **Vercel**.
 
 👉 **Live Demo:**  
 https://job-application-tracker-frontend-pi.vercel.app/login
@@ -7,17 +7,18 @@ https://job-application-tracker-frontend-pi.vercel.app/login
 ---
 
 ## 🚀 Overview  
-This app helps users track their job applications in a clean, modern dashboard.  
-Users can:
+The Job Application Tracker lets users organize and monitor their job search in a clean, intuitive dashboard.
 
-- Create an account & log in with **Supabase Auth**
-- Add job applications with notes & status
-- View all their applications in a clean dashboard
-- Update status (Applied / Interviewing / Offer / Rejected)
-- Delete applications
-- Enjoy automatic **per-user data isolation** with Supabase RLS rules
+With this app, users can:
 
-This is a production-ready CRUD application with authentication, authorization, and a connected cloud database.
+- Create an account with **Supabase Auth**
+- Add job applications with notes & status  
+- View all applications in a sortable dashboard  
+- Update status (Applied / Interviewing / Offer / Rejected)  
+- Delete applications  
+- Automatically get isolated data through **Supabase RLS**
+
+This is a **fully serverless, production-ready CRUD application** with authentication, authorization, and a connected cloud database.
 
 ---
 
@@ -25,28 +26,28 @@ This is a production-ready CRUD application with authentication, authorization, 
 
 ### 🔐 Authentication + Authorization  
 - Full **Sign Up**, **Login**, **Logout**  
-- Auth powered by **Supabase**  
-- User metadata stores name for personalized experience  
-- Supabase **Row Level Security (RLS)** ensures each user only sees their own jobs
+- Auth via **Supabase**  
+- User metadata stores personalized info (e.g., name)  
+- **Row Level Security (RLS)** ensures each user only accesses their own jobs
 
 ### 🗃️ CRUD Over Cloud Database  
-- Add jobs (company, position, status, notes)
+- Add job entries (company, role, status, notes)  
 - Update job status with one click  
-- Delete jobs  
-- Automatically sorted newest → oldest  
-- Data stored in **Supabase Postgres**
+- Delete jobs instantly  
+- Automatically sorted by most recent  
+- All data stored in **Supabase Postgres**
 
 ### 🖥️ UI/UX  
-- Modern, minimal dashboard  
-- Floating “+” Add button  
+- Modern dashboard  
+- Floating **+** Add Button  
 - Clean Add Job form  
-- User-friendly status badges  
 - Responsive layout  
-- Styled components in pure CSS (App.css)
+- Styled using pure CSS (App.css)
 
 ### ☁️ Deployment  
-- Frontend deployed on **Vercel**  
-- Backend = **Supabase** (Auth + Database + RLS)
+- Frontend → **Vercel**  
+- Backend → **Supabase** (Database + Auth + Policies)  
+- No dedicated backend server required
 
 ---
 
@@ -88,7 +89,7 @@ src/
 
 ---
 
-### 🔧 Environment Variables  
+## 🔧 Environment Variables  
 Create a `.env` file in the project root:
 - REACT_APP_SUPABASE_URL=your_supabase_project_url
 - REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -97,7 +98,7 @@ Restart the dev server after adding env variables.
 
 ---
 
-### ▶️ **Running Locally**
+## ▶️ **Running Locally**
 - npm install
 - npm start
 
@@ -110,17 +111,17 @@ http://localhost:3000
 ## 🌐 **Deployment**
 
 ### **Frontend**
-Deployed to Vercel:  
-Automatic deploys on every commit to `main`.
+Deployed on **Vercel** with automatic deployments on every commit to `main`.
 
 ### **Backend**
-Supabase handles:
-- Auth  
-- Database  
-- RLS  
-- API endpoints  
+Supabase handles all:
+- Authentication  
+- Database storage  
+- Row Level Security  
+- Policies  
+- Auto-generated REST & RPC APIs  
 
-No backend server required.
+No custom backend server needed.
 
 ---
 
