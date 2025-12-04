@@ -20,7 +20,7 @@ https://job-application-tracker-frontend-pi.vercel.app/login
 ## ⭐ Why I Built This  
 I used to track all my applications in Google Sheets, but it quickly got messy and didn’t feel personal. I wanted something cleaner—something built around the way *I* search for jobs.
 
-This project let me create a tool I actually enjoy using while also gaining real experience with:
+This project allowed me to create a tool that I actually enjoy using while also gaining real experience with:
 
 - Authentication  
 - Cloud-hosted databases  
@@ -126,12 +126,11 @@ Supabase **Row Level Security** ensures:
 
 ---
 
-## 🧭 Future Improvements  
-- Sorting & filtering  
+## 🧭 Future Improvements
 - Visualization/analytics  
 - Job detail pages  
-- Framer Motion animations  
-- Notes history  
+- Framer Motion animations
+- Resume/Cover Letter Uploads
 
 ---
 
