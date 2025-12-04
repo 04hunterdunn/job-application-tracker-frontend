@@ -8,6 +8,7 @@
 ![Railway](https://img.shields.io/badge/Original_DB-Railway-0B0D0E?logo=railway)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 ![Stars](https://img.shields.io/github/stars/04hunterdunn/job-application-tracker-frontend?style=social)
+
 A clean, modern job-tracking application built with **React**, **Supabase Auth**, and **Supabase Postgres**, deployed on **Vercel**.  
 The app helps users organize and manage job applications in a simple, personalized dashboard.
 
