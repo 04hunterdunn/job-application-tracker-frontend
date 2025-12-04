@@ -86,7 +86,7 @@ src/
 
 ---
 
-## 🔧 Environment Variables  
+## 🔧 **Environment Variables**  
 Create a `.env` file in the project root:
 -REACT_APP_SUPABASE_URL=your_supabase_project_url
 -REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -94,7 +94,7 @@ Restart the dev server after adding env variables.
 
 ---
 
-## ▶️ Running Locally
+## ▶️ **Running Locally**
 -npm install
 -npm start
 
@@ -103,7 +103,7 @@ http://localhost:3000
 
 ---
 
-## 🌐 Deployment
+## 🌐 **Deployment**
 
 ### **Frontend**
 Deployed to Vercel:  
