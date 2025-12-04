@@ -1,69 +1,78 @@
 # 📌 Job Application Tracker  
-A modern, serverless job-tracking application built with **React**, **Supabase Auth**, and **Supabase Postgres**, fully deployed on **Vercel**.
+A clean, modern job-tracking application built with **React**, **Supabase Auth**, and **Supabase Postgres**, deployed on **Vercel**.  
+The app helps users organize and manage job applications in a simple, personalized dashboard.
 
-👉 **Live Demo:**  
+👉 **Live App:**  
 https://job-application-tracker-frontend-pi.vercel.app/login
 
 ---
 
-## 🚀 Overview  
-The Job Application Tracker lets users organize and monitor their job search in a clean, intuitive dashboard.
+## ⭐ Why I Built This  
+I originally used Google Sheets to track my job applications, but it never felt personalized or structured enough.  
+I wanted something cleaner—something built around the way *I* search for jobs.
 
-With this app, users can:
+At the same time, I wanted hands-on experience building and deploying a full-stack application.  
+This project gave me both:
 
-- Create an account with **Supabase Auth**
-- Add job applications with notes & status  
-- View all applications in a sortable dashboard  
-- Update status (Applied / Interviewing / Offer / Rejected)  
-- Delete applications  
-- Automatically get isolated data through **Supabase RLS**
-
-This is a **fully serverless, production-ready CRUD application** with authentication, authorization, and a connected cloud database.
+- A job tracker that I actually enjoy using  
+- Real experience with frontend, backend, authentication, databases, and cloud deployment  
 
 ---
 
-## ✨ Features
+## 🕘 Project Evolution
 
-### 🔐 Authentication + Authorization  
-- Full **Sign Up**, **Login**, **Logout**  
-- Auth via **Supabase**  
-- User metadata stores personalized info (e.g., name)  
-- **Row Level Security (RLS)** ensures each user only accesses their own jobs
+### **🔵 Version 1 (Archived: Java Spring Boot + MySQL)**  
+The first full version of this app was built using a traditional backend stack:
 
-### 🗃️ CRUD Over Cloud Database  
-- Add job entries (company, role, status, notes)  
-- Update job status with one click  
-- Delete jobs instantly  
-- Automatically sorted by most recent  
-- All data stored in **Supabase Postgres**
+- **Backend:** Java Spring Boot (deployed on Render)  
+- **Database:** MySQL on Railway  
+- **Frontend:** React on Vercel  
+- Full REST API (CRUD, status updates, authentication)  
 
-### 🖥️ UI/UX  
-- Modern dashboard  
-- Floating **+** Add Button  
-- Clean Add Job form  
-- Responsive layout  
-- Styled using pure CSS (App.css)
+That version is fully preserved here (archived for reference):  
+📦 **Original Backend Repo:** https://github.com/04hunterdunn/job-application-tracker-backend
 
-### ☁️ Deployment  
-- Frontend → **Vercel**  
-- Backend → **Supabase** (Database + Auth + Policies)  
-- No dedicated backend server required
+It was an important learning experience in API design, SQL schema structure, and multi-service cloud deployment.
 
 ---
 
-## 🛠️ Tech Stack
+### **🟢 Current Version (Supabase + React)**  
+After learning from the original version, I rebuilt the app using a simpler, faster, serverless architecture:
+
+- **Supabase Auth** for Sign Up / Login / Logout  
+- **Supabase Postgres** for cloud-hosted data  
+- **Row Level Security (RLS)** so every user only sees their own jobs  
+- **React frontend** deployed on Vercel  
+- No backend server to maintain  
+
+This version is cleaner, more maintainable, and matches what I originally wanted:  
+a personalized job tracker with a modern UI and secure, cloud-based storage.
+
+---
+
+## ✨ Features  
+- Create an account and log in  
+- Add job applications with company, role, notes, and status  
+- Update job status (Applied → Interviewing → Offer → Rejected)  
+- Delete entries  
+- Dashboard automatically sorted by newest → oldest  
+- Full per-user data isolation via Supabase RLS  
+
+---
+
+## 🛠️ Tech Stack (Current Version)
 
 ### **Frontend**
-- React (Create React App)
-- CSS Modules / App.css
-- Supabase JavaScript Client
-- Vercel
+- React  
+- Supabase JavaScript Client  
+- Deployed on Vercel  
+- Pure CSS for styling  
 
 ### **Backend**
 - Supabase Postgres  
 - Supabase Auth  
 - Supabase Row Level Security  
-- Supabase Policies
+- Auto-generated REST/RPC APIs (no custom server needed)  
 
 ---
 
@@ -71,22 +80,13 @@ This is a **fully serverless, production-ready CRUD application** with authentic
 ```
 src/
 ├── Components/
-│ ├── JobList.js
-│ ├── JobForm.js
-│ ├── FloatingAddButton.js
-│ └── Welcome.js
 ├── pages/
-│ ├── JobsPage.jsx
-│ ├── NewJobPage.jsx
-│ ├── SignIn.jsx
-│ └── SignUp.jsx
 ├── supabaseClient.js
 ├── App.js
 └── App.css
 ├── Index.js
 └── Index.css
 ```
-
 ---
 
 ## 🔧 Environment Variables  
@@ -108,23 +108,6 @@ http://localhost:3000
 
 ---
 
-## 🌐 **Deployment**
-
-### **Frontend**
-Deployed on **Vercel** with automatic deployments on every commit to `main`.
-
-### **Backend**
-Supabase handles all:
-- Authentication  
-- Database storage  
-- Row Level Security  
-- Policies  
-- Auto-generated REST & RPC APIs  
-
-No custom backend server needed.
-
----
-
 ## 🔒 Security  
 This project uses Supabase **Row Level Security** to ensure:
 
@@ -140,6 +123,15 @@ This project uses Supabase **Row Level Security** to ensure:
 -Job Dashboard: <img width="1900" height="892" alt="Screenshot 2025-12-04 144552" src="https://github.com/user-attachments/assets/407d133d-be61-4761-a3f0-6f285762898c" />
 
 -Add Job Page: <img width="1885" height="891" alt="Screenshot 2025-12-04 144648" src="https://github.com/user-attachments/assets/bdfb25d4-ae71-4fa4-92b7-638d1d905dbf" />
+
+---
+
+## 🧭 Future Improvements  
+- Sorting & filtering options  
+- Analytics/visual stats for job search progress  
+- Job detail pages  
+- Framer Motion animations  
+- Notes history or timeline view
 
 ---
 
