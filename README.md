@@ -1,70 +1,145 @@
-# Getting Started with Create React App
+# 📌 Job Application Tracker  
+A full-stack, SaaS-style job tracking app built with **React**, **Supabase Auth**, **Supabase Postgres**, and deployed on **Vercel**.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+👉 **Live Demo:**  
+https://job-application-tracker-frontend-pi.vercel.app/login
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Overview  
+This app helps users track their job applications in a clean, modern dashboard.  
+Users can:
 
-### `npm start`
+- Create an account & log in with **Supabase Auth**
+- Add job applications with notes & status
+- View all their applications in a clean dashboard
+- Update status (Applied / Interviewing / Offer / Rejected)
+- Delete applications
+- Enjoy automatic **per-user data isolation** with Supabase RLS rules
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This is a production-ready CRUD application with authentication, authorization, and a connected cloud database.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ✨ Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔐 Authentication + Authorization  
+- Full **Sign Up**, **Login**, **Logout**  
+- Auth powered by **Supabase**  
+- User metadata stores name for personalized experience  
+- Supabase **Row Level Security (RLS)** ensures each user only sees their own jobs
 
-### `npm run build`
+### 🗃️ CRUD Over Cloud Database  
+- Add jobs (company, position, status, notes)
+- Update job status with one click  
+- Delete jobs  
+- Automatically sorted newest → oldest  
+- Data stored in **Supabase Postgres**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🖥️ UI/UX  
+- Modern, minimal dashboard  
+- Floating “+” Add button  
+- Clean Add Job form  
+- User-friendly status badges  
+- Responsive layout  
+- Styled components in pure CSS (App.css)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### ☁️ Deployment  
+- Frontend deployed on **Vercel**  
+- Backend = **Supabase** (Auth + Database + RLS)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🛠️ Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **Frontend**
+- React (Create React App)
+- CSS Modules / App.css
+- Supabase JavaScript Client
+- Vercel
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **Backend**
+- Supabase Postgres  
+- Supabase Auth  
+- Supabase Row Level Security  
+- Supabase Policies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📂 Application Structure
+```
+src/
+├── Components/
+│ ├── JobList.js
+│ ├── JobForm.js
+│ ├── FloatingAddButton.js
+│ └── Welcome.js
+├── pages/
+│ ├── JobsPage.jsx
+│ ├── NewJobPage.jsx
+│ ├── SignIn.jsx
+│ └── SignUp.jsx
+├── supabaseClient.js
+├── App.js
+└── App.css
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔧 Environment Variables  
+Create a `.env` file in the project root:
+-REACT_APP_SUPABASE_URL=your_supabase_project_url
+-REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+Restart the dev server after adding env variables.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## ▶️ Running Locally
+-npm install
+-npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Your app will open at:  
+http://localhost:3000
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🌐 Deployment
 
-### Making a Progressive Web App
+### **Frontend**
+Deployed to Vercel:  
+Automatic deploys on every commit to `main`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### **Backend**
+Supabase handles:
+- Auth  
+- Database  
+- RLS  
+- API endpoints  
 
-### Advanced Configuration
+No backend server required.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🔒 Security  
+This project uses Supabase **Row Level Security** to ensure:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Users only access their own jobs  
+- No cross-user data leaks  
+- Policies enforce user_id = auth.uid()
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📸 Screenshots
+-Login/SignUp: <img width="1911" height="903" alt="Screenshot 2025-12-04 144320" src="https://github.com/user-attachments/assets/ba0ef3c1-eed6-4e80-8144-4e5eec785ced" />
+
+-Job Dashboard: <img width="1900" height="892" alt="Screenshot 2025-12-04 144552" src="https://github.com/user-attachments/assets/407d133d-be61-4761-a3f0-6f285762898c" />
+
+-Add Job Page: <img width="1885" height="891" alt="Screenshot 2025-12-04 144648" src="https://github.com/user-attachments/assets/bdfb25d4-ae71-4fa4-92b7-638d1d905dbf" />
+
+---
+
+## 🧑‍💻 Author  
+**Hunter Dunn**  
+Computer Science & Data Science  
+University of St. Thomas  
+GitHub: https://github.com/04hunterdunn
