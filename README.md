@@ -82,23 +82,27 @@ src/
 ├── supabaseClient.js
 ├── App.js
 └── App.css
+├── Index.js
+└── Index.css
 ```
 
 ---
 
-## 🔧 **Environment Variables**  
+### 🔧 Environment Variables  
 Create a `.env` file in the project root:
--REACT_APP_SUPABASE_URL=your_supabase_project_url
--REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+- REACT_APP_SUPABASE_URL=your_supabase_project_url
+- REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+  
 Restart the dev server after adding env variables.
 
 ---
 
-## ▶️ **Running Locally**
--npm install
--npm start
+### ▶️ **Running Locally**
+- npm install
+- npm start
 
-Your app will open at:  
+Your app will open at:
+
 http://localhost:3000
 
 ---
