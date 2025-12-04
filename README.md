@@ -1,4 +1,13 @@
 # 📌 Job Application Tracker  
+![React](https://img.shields.io/badge/Frontend-React-blue?logo=react)
+![Supabase](https://img.shields.io/badge/Backend-Supabase-3ECF8E?logo=supabase&logoColor=white)
+![Java Spring Boot](https://img.shields.io/badge/Original_Backend-Spring_Boot-6DB33F?logo=springboot&logoColor=white)
+![MySQL](https://img.shields.io/badge/Database-MySQL-005C84?logo=mysql)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)
+![Render](https://img.shields.io/badge/Original_Deploy-Render-46E3B7?logo=render)
+![Railway](https://img.shields.io/badge/Original_DB-Railway-0B0D0E?logo=railway)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Stars](https://img.shields.io/github/stars/04hunterdunn/job-application-tracker-frontend?style=social)
 A clean, modern job-tracking application built with **React**, **Supabase Auth**, and **Supabase Postgres**, deployed on **Vercel**.  
 The app helps users organize and manage job applications in a simple, personalized dashboard.
 
